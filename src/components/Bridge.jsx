@@ -21,7 +21,7 @@ const Bridge = () => {
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top top",
-        end: "+=200%",
+        end: "+=160%", 
         pin: true,
         scrub: 1,
       });
@@ -31,39 +31,39 @@ const Bridge = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=150%", // Animation finishes at 150%
+          end: "+=160%", 
           scrub: 1,
         }
       });
 
-      // 1. Character Jump (Separated X and Y for smoothness)
+      // 1. Character Jump (Moving off-screen at the end)
       tl.to(characterRef.current, {
-        x: "80vw",
+        x: "120vw", // Moves off-screen
         duration: 3,
         ease: "none"
       }, 0)
       .to(characterRef.current, {
-        y: -120,
+        y: -100, // Slightly lower jump
         rotation: 20,
-        duration: 1.5,
+        duration: 1, // Up in 1s
         ease: "power1.out"
       }, 0)
       .to(characterRef.current, {
         y: 0,
         rotation: 0,
-        duration: 1.5,
+        duration: 1, // Down in 1s
         ease: "power1.in"
-      }, 1.5);
+      }, 1); // Finished vertical jump at 2/3 of total scroll
 
       // Parallax Background
       gsap.to(bgRef.current, {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=150%", // Sync with jump
+          end: "+=160%",
           scrub: 2,
         },
-        x: "-5%", // Even less movement
+        x: "-5%",
         scale: 1.05
       });
 
