@@ -4,15 +4,15 @@ import snapLogo from '../assets/snap_logo.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-white pt-20 pb-10 border-t border-slate-100">
+    <footer className="bg-bg-dark pt-20 pb-10 border-t border-white/5">
       <div className="container mx-auto px-6 max-w-[1200px]">
         {/* SEO Keyword / Service Cloud Section */}
-        <div className="mb-16 pb-16 border-b border-slate-100 text-center">
+        <div className="mb-16 pb-16 border-b border-white/5 text-center">
           <div className="max-w-[1000px] mx-auto">
-            <h4 className="text-[13px] font-bold text-text-dark mb-6 uppercase tracking-[2px]">
+            <h4 className="text-[13px] font-bold text-white mb-6 uppercase tracking-[2px]">
               Snap - Global Software & Design Agency
             </h4>
-            <div className="text-[12px] leading-[2.6] text-text-light flex flex-wrap justify-center items-center gap-y-1">
+            <div className="text-[12px] leading-[2.6] text-gray-500 flex flex-wrap justify-center items-center gap-y-1">
               {[
                 "Snap - Premium Software & Web Agency", "Gurugram", "Dubai", "USA", "UK", "Global",
                 "Custom Web Development", "Enterprise Web Applications", "SaaS Dashboard Development",
@@ -35,7 +35,7 @@ const Footer = () => {
               ].map((keyword, index, array) => (
                 <React.Fragment key={index}>
                   <span className="hover:text-primary transition-colors cursor-default inline-block">{keyword}</span>
-                  {index < array.length - 1 && <span className="mx-2 text-slate-300 select-none">|</span>}
+                  {index < array.length - 1 && <span className="mx-2 text-white/10 select-none">|</span>}
                 </React.Fragment>
               ))}
             </div>
@@ -47,9 +47,9 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center gap-4 text-center">
             <Link to="/" className="flex items-center gap-2 group">
               <img src={snapLogo} alt="Snap Logo" className="h-6 w-auto group-hover:scale-105 transition-transform" />
-              <span className="font-heading font-black text-xl tracking-tighter bg-gradient-to-r from-blue-500 via-fuchsia-500 to-cyan-400 bg-[length:300%_auto] animate-gradient bg-clip-text text-transparent ml-0.5 inline-block py-1">Snap</span>
+              <span className="font-heading font-black text-xl tracking-tighter text-white ml-0.5 inline-block py-1">Snap</span>
             </Link>
-            <p className="text-[13px] text-text-light font-medium">
+            <p className="text-[13px] text-gray-500 font-medium">
               &copy; 2021–2026 Snap. All rights reserved.
             </p>
           </div>

@@ -1,78 +1,187 @@
-import React from 'react';
-import { BsCodeSlash, BsCart, BsGrid1X2, BsServer, BsArrowRight } from 'react-icons/bs';
+import React, { useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { BsLayers, BsBullseye, BsPalette, BsLaptop, BsMegaphone, BsArrowRight } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    icon: <BsCodeSlash />,
-    title: 'Custom Web\nDevelopment',
-    description: 'Bespoke websites and enterprise applications tailored to your specific business infrastructure and goals.',
-    path: '/services/web-development'
+    icon: <BsBullseye />,
+    title: 'Digital Strategy',
+    description: 'We define your path to success through deep market analysis and strategic planning.',
+    path: '/services/strategy',
+    suit: '♦',
+    color: '#E31E24',
   },
   {
-    icon: <BsServer />,
-    title: 'Modern\nWeb Apps',
-    description: 'Scalable, secure, and conversion-optimized interactive platforms that drive growth.',
-    path: '/services/web-apps'
+    icon: <BsPalette />,
+    title: 'Brand Identity',
+    description: 'Creating visual languages that speak volumes about your brand values and mission.',
+    path: '/services/brand',
+    suit: '♠',
+    color: '#111111',
   },
   {
-    icon: <BsCart />,
-    title: 'Custom\nSoftwares',
-    description: 'Seamless connectivity between your platforms and essential third-party services and data.',
-    path: '/services/custom-softwares'
-  }
+    icon: <BsLaptop />,
+    title: 'Web Aesthetics',
+    description: 'High-end website design and development with focus on performance and experience.',
+    path: '/services/web-development',
+    suit: '♥',
+    color: '#E31E24',
+  },
+  {
+    icon: <BsLayers />,
+    title: 'UI/UX Design',
+    description: 'User-centric interfaces designed to convert and provide seamless interactions.',
+    path: '/services/ui-ux',
+    suit: '♣',
+    color: '#111111',
+  },
+  {
+    icon: <BsMegaphone />,
+    title: 'Digital Marketing',
+    description: 'Amplifying your brand reach through targeted performance marketing and SEO.',
+    path: '/services/marketing',
+    suit: '♦',
+    color: '#E31E24',
+  },
 ];
 
 const Expertise = () => {
+  const sectionRef = useRef(null);
+  const deckRef = useRef(null);
+
+  useEffect(() => {
+    const cards = deckRef.current.querySelectorAll('.playing-card');
+    
+    let ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '+=300%', 
+          scrub: 1,
+          pin: true,
+        }
+      });
+
+      cards.forEach((card, i) => {
+        if (i === 0) return;
+
+        tl.fromTo(card, 
+          { 
+            x: '100vw', 
+            rotation: 20, 
+            opacity: 0,
+          },
+          { 
+            x: i * 8, 
+            y: i * -5, 
+            rotation: i % 2 === 0 ? 5 : -5, 
+            opacity: 1,
+            ease: 'power2.out',
+            duration: 1
+          }, 
+          (i - 1) * 0.5
+        );
+
+        tl.to(cards[i-1], {
+          scale: 0.95,
+          opacity: 0.7,
+          duration: 0.5
+        }, (i - 1) * 0.5);
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="services" className="py-32 bg-white relative overflow-hidden">
-      {/* Soft Gradient Background Blobs */}
-      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-blue-50/40 blur-[150px] -z-10 rounded-full"></div>
-      <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-indigo-50/30 blur-[130px] -z-10 rounded-full"></div>
-      
-      <div className="container mx-auto px-6 max-w-[1200px]">
-        <div className="text-center max-w-[800px] mx-auto mb-20 animate-[fadeInUp_0.8s_ease-out_forwards]">
-          <div className="inline-block px-4 py-1 mb-6 rounded-full bg-blue-50/80 backdrop-blur-sm text-primary border border-blue-100/50 text-[11px] font-bold tracking-[0.2em] uppercase">
-            Our Expertise
-          </div>
-          <h2 className="text-4xl md:text-6xl text-text-dark mb-6 tracking-tight font-heading font-extrabold leading-[1.1]">
-            Digital Solutions <span className="text-primary">Redefined</span>
-          </h2>
-          <p className="text-text-light text-lg md:text-xl leading-relaxed font-medium opacity-80">
-            We blend aesthetic precision with technical excellence to build <br className="hidden md:block" /> the next generation of digital products.
-          </p>
+    <section 
+      ref={sectionRef} 
+      id="services" 
+      className="relative min-h-screen bg-black overflow-hidden flex items-center justify-center py-20"
+    >
+      <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-16">
+        
+        {/* Left Side Content */}
+        <div className="w-full lg:w-1/2 text-left">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border border-white/10 bg-white/5">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-[11px] font-bold tracking-widest uppercase text-white">Full-Service Agency</span>
+            </div>
+            <h2 className="text-5xl md:text-8xl text-white font-heading font-black leading-[0.9] uppercase mb-8">
+              Expertise <br />
+              <span className="text-primary italic">Solutions</span>
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed max-w-md mb-10">
+              We specialize in creating high-end digital products that set new standards in design and performance.
+            </p>
+            
+            <Link
+              to="/contact"
+              className="group inline-flex items-center gap-4 px-10 py-5 rounded-full bg-primary text-white font-bold uppercase tracking-widest text-[13px] hover:bg-white hover:text-black transition-all duration-300 shadow-xl shadow-primary/20"
+            >
+              Start Your Journey
+              <BsArrowRight className="text-xl group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-          {services.map((service, index) => (
-            <div 
-              key={index} 
-              className="relative p-10 bg-white border border-slate-100 rounded-[40px] flex flex-col shadow-sm animate-[fadeInUp_0.8s_ease-out_forwards]" 
-              style={{ animationDelay: `${index * 0.15}s`, opacity: 0 }}
-            >
-              <div className="relative z-10 flex flex-col h-full">
-                <div className="mb-10 w-14 h-14 flex items-center justify-center rounded-2xl bg-blue-50 text-primary text-2xl shadow-sm">
-                  {service.icon}
-                </div>
-                
-                <h3 className="text-2xl mb-5 text-text-dark font-heading font-bold leading-tight whitespace-pre-line">
-                  {service.title}
-                </h3>
-                
-                <p className="text-[16px] text-text-light leading-[1.8] mb-10 font-medium opacity-80">
-                  {service.description}
-                </p>
-                
-                <Link 
-                  to={service.path}
-                  className="mt-auto flex items-center text-primary font-bold text-xs tracking-[0.1em] uppercase hover:underline"
+        {/* Right Side (Cards) */}
+        <div className="w-full lg:w-1/2 flex justify-center items-center h-[400px] md:h-[600px] relative">
+           <div 
+             ref={deckRef} 
+             className="relative w-[280px] h-[400px] md:w-[350px] md:h-[500px]"
+           >
+              {services.map((service, index) => (
+                <div 
+                   key={index}
+                   className="playing-card absolute inset-0 rounded-[30px] border border-white/10 shadow-2xl overflow-hidden"
+                   style={{ 
+                     background: service.color,
+                     zIndex: index + 10,
+                   }}
                 >
-                  Explore Service <BsArrowRight className="ml-2 text-lg" />
-                </Link>
-              </div>
-            </div>
-          ))}
+                  <div className="h-full p-8 md:p-12 flex flex-col justify-between text-white">
+                    <div className="flex justify-between items-start">
+                       <span className="text-4xl font-black">{service.suit}</span>
+                       <div className="text-3xl opacity-20 font-black">0{index + 1}</div>
+                    </div>
+
+                    <div>
+                       <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-3xl mb-6">
+                          {service.icon}
+                       </div>
+                       <h3 className="text-3xl md:text-5xl font-heading font-black uppercase leading-none mb-4">
+                          {service.title}
+                       </h3>
+                       <p className="text-sm opacity-70 leading-relaxed max-w-[250px]">
+                          {service.description}
+                       </p>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                       <span className="text-[10px] font-bold tracking-[0.3em] uppercase opacity-40">Snap Creative</span>
+                       <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center">
+                          <BsArrowRight />
+                       </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+           </div>
         </div>
+
       </div>
     </section>
   );

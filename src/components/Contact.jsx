@@ -1,73 +1,94 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { BsArrowRight, BsEnvelope, BsTelephone, BsGeoAlt } from 'react-icons/bs';
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-24 bg-[#18181b]">
-      <div className="container mx-auto px-6 max-w-[800px] flex flex-col items-center">
-        
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl text-white font-heading font-semibold mb-4 tracking-tight">
-            Ready to Transform Your Online<br />Presence?
-          </h2>
-          <p className="text-gray-400 text-[15px] sm:text-base max-w-[500px] mx-auto">
-            Send us a brief about your project and we'll get back to you within 24 hours.
-          </p>
+    <section id="contact" className="py-32 bg-bg-dark relative overflow-hidden">
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-grid-white opacity-40 pointer-events-none" />
+
+      <div className="container mx-auto px-6 max-w-[1200px] relative z-10">
+        <div className="flex flex-col lg:flex-row gap-20">
+          
+          {/* Info Side */}
+          <div className="w-full lg:w-1/2">
+             <motion.div
+               initial={{ opacity: 0, x: -30 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               viewport={{ once: true }}
+             >
+                <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border border-white/10 bg-white/5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400">Contact Us</span>
+                </div>
+                <h2 className="text-5xl md:text-8xl text-white font-heading font-black leading-[0.85] tracking-tighter uppercase mb-10">
+                  Let's Build <br />
+                  <span className="text-primary italic">Together</span>
+                </h2>
+                
+                <div className="space-y-10 mt-16">
+                   <div className="flex items-center gap-8 group">
+                      <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary text-2xl group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                         <BsEnvelope />
+                      </div>
+                      <div>
+                         <h4 className="text-gray-500 text-[11px] font-bold uppercase tracking-widest mb-1">Email Us</h4>
+                         <p className="text-white text-xl font-bold">hello@snapstudio.com</p>
+                      </div>
+                   </div>
+
+                   <div className="flex items-center gap-8 group">
+                      <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary text-2xl group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                         <BsTelephone />
+                      </div>
+                      <div>
+                         <h4 className="text-gray-500 text-[11px] font-bold uppercase tracking-widest mb-1">Call Us</h4>
+                         <p className="text-white text-xl font-bold">+1 (555) 000-0000</p>
+                      </div>
+                   </div>
+
+                   <div className="flex items-center gap-8 group">
+                      <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary text-2xl group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                         <BsGeoAlt />
+                      </div>
+                      <div>
+                         <h4 className="text-gray-500 text-[11px] font-bold uppercase tracking-widest mb-1">Visit Us</h4>
+                         <p className="text-white text-xl font-bold">Dubai, UAE</p>
+                      </div>
+                   </div>
+                </div>
+             </motion.div>
+          </div>
+
+          {/* Form Side */}
+          <div className="w-full lg:w-1/2">
+             <div className="bg-bg-light p-10 md:p-16 rounded-[48px] border border-white/5 shadow-2xl relative">
+                <form className="space-y-8">
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="space-y-2">
+                         <label className="text-gray-500 text-[11px] font-bold uppercase tracking-widest ml-4">Name</label>
+                         <input type="text" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-primary transition-all" placeholder="John Doe" />
+                      </div>
+                      <div className="space-y-2">
+                         <label className="text-gray-500 text-[11px] font-bold uppercase tracking-widest ml-4">Email</label>
+                         <input type="email" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-primary transition-all" placeholder="john@example.com" />
+                      </div>
+                   </div>
+                   
+                   <div className="space-y-2">
+                      <label className="text-gray-500 text-[11px] font-bold uppercase tracking-widest ml-4">Message</label>
+                      <textarea rows="5" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-primary transition-all resize-none" placeholder="Tell us about your project..."></textarea>
+                   </div>
+
+                   <button className="w-full py-5 rounded-full bg-primary text-white font-extrabold uppercase tracking-widest text-[13px] hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-4">
+                      Send Message
+                      <BsArrowRight className="text-xl" />
+                   </button>
+                </form>
+             </div>
+          </div>
         </div>
-
-        <div className="w-full">
-          <form className="w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="name" className="text-[10px] sm:text-[11px] font-semibold text-gray-500 tracking-[1.5px] uppercase ml-1">
-                  FULL NAME
-                </label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  placeholder="John Doe" 
-                  required 
-                  className="bg-[#27272a] border border-[#3f3f46] text-white text-[15px] rounded-lg px-5 py-3.5 focus:outline-none focus:border-primary transition-colors placeholder:text-gray-500"
-                />
-              </div>
-              
-              <div className="flex flex-col gap-2">
-                <label htmlFor="email" className="text-[10px] sm:text-[11px] font-semibold text-gray-500 tracking-[1.5px] uppercase ml-1">
-                  EMAIL ADDRESS
-                </label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  placeholder="john@company.com" 
-                  required 
-                  className="bg-[#27272a] border border-[#3f3f46] text-white text-[15px] rounded-lg px-5 py-3.5 focus:outline-none focus:border-primary transition-colors placeholder:text-gray-500"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2 mb-10">
-              <label htmlFor="brief" className="text-[10px] sm:text-[11px] font-semibold text-gray-500 tracking-[1.5px] uppercase ml-1">
-                PROJECT BRIEF
-              </label>
-              <textarea 
-                id="brief" 
-                rows="4" 
-                placeholder="Tell us about your goals and timeline..." 
-                required
-                className="bg-[#27272a] border border-[#3f3f46] text-white text-[15px] rounded-lg px-5 py-4 focus:outline-none focus:border-primary transition-colors placeholder:text-gray-500 resize-none"
-              ></textarea>
-            </div>
-
-            <div className="flex justify-center">
-              <button 
-                type="submit" 
-                className="inline-flex items-center justify-center px-8 py-3.5 rounded-full font-medium text-[15px] bg-primary text-white hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-[0_10px_15px_-3px_rgba(37,99,235,0.2)] transition-all duration-150"
-              >
-                Send Inquiry
-              </button>
-            </div>
-          </form>
-        </div>
-
       </div>
     </section>
   );
